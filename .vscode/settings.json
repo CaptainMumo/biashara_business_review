@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "development-virtual-environment/bin/python",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
-}
