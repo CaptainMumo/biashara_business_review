@@ -1,0 +1,60 @@
+body{
+    font:16px/1.5 "Times New Roman",Times,sans-serif;
+    padding:0;
+    margin:0;
+    background-color: lightslategrey;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+    overflow:hidden;
+}
+
+header{
+    background:blue;
+    color:white;
+    font-size:16px;
+    border-bottom: black 4px solid;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+}
+
+header li{
+    display:inline;
+    padding: 0 20px 0 20px;
+}
+
+header #title{
+    float:left;
+}
+
+header nav{
+    float:right;
+    margin-top:24px;
+}
+
+.body {
+    
+    float: center;
+    text-align: center;
+    font-size:16px;
+    color: white;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+footer{
+    background: blue;
+    color:white;
+    text-align:center;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    padding:0;
+    border-top: black 4px solid;
+}
