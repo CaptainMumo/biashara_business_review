@@ -16,10 +16,10 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="business.html">Businesses</a></li>
                     <li><a href="review.html">Reviews</a></li>
-                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="{{ url_for('signin') }}">Sign In</a></li>
                     <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
                 </ul>
             </nav>
