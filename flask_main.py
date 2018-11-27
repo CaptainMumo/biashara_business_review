@@ -4,14 +4,7 @@ from forms import SignupForm, SigninForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e8f836430f6c0c054ffe0231a7158fe1'
 
-users = [ 
-            {
-                'username': "Captain Mumo",
-                'email': "mumopeter17@gmail.com",
-                'location': "Oloolua",
-                'password': "qwertyuiop"
-            }
-        ]
+users = []
 
 @app.route("/")
 def home():
@@ -21,15 +14,19 @@ def home():
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
+
         user = {
-            'username' : request.form['username'],
-            'email' : request.form['email'],
-            'location' : request.form['location'],
-            'password' : request.form['password']
-        }
+                'username' : request.form['username'],
+                'email' : request.form['email'],
+                'location' : request.form['location'],
+                'password' : request.form['password']
+            }
+        
         users.append(user)
-        return redirect(url_for('home'))
-    return render_template('signup.html', title='Sign Up', form=form, users=users)
+        flash('Account created successfully!',category="message")
+        return redirect(url_for('signin')) 
+        
+    return render_template('signup.html', title='Sign Up', form=form, users=users) 
 
 @app.route("/auth/signin", methods=['GET', 'POST'])
 def signin():

@@ -73,6 +73,17 @@ input, label {
 }
 
 
+.flash_message {
+    width: 40%;
+    border: 1px solid lightslategray;
+    background-color: rgb(49, 158, 49);
+    color: white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 input[type=submit] {
     width: 30%;
     background-color: green;
@@ -88,6 +99,9 @@ input[type=submit]:hover {
     background-color: green;
 }
 
+.error {
+    color: red;
+}
 
 footer{
     background: blue;
