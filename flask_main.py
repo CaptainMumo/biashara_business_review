@@ -32,6 +32,7 @@ def signup():
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
+        flash('Logged in successfully!',category="message")
         return redirect(url_for('home'))
     return render_template('signin.html', title='Sign In', form=form)
 
