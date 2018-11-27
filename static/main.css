@@ -88,6 +88,9 @@ input[type=submit]:hover {
     background-color: green;
 }
 
+.error {
+    color: red;
+}
 
 footer{
     background: blue;
