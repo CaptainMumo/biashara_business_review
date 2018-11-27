@@ -4,14 +4,7 @@ from forms import SignupForm, SigninForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e8f836430f6c0c054ffe0231a7158fe1'
 
-users = [ 
-            {
-                'username': "Captain Mumo",
-                'email': "mumopeter17@gmail.com",
-                'location': "Oloolua",
-                'password': "qwertyuiop"
-            }
-        ]
+users = []
 
 @app.route("/")
 def home():
@@ -28,8 +21,8 @@ def signup():
             'password' : request.form['password']
         }
         users.append(user)
-        return redirect(url_for('home'))
-    return render_template('signup.html', title='Sign Up', form=form, users=users)
+        return redirect(url_for('signin'))  
+    return render_template('signup.html', title='Sign Up', form=form)
 
 @app.route("/auth/signin", methods=['GET', 'POST'])
 def signin():
