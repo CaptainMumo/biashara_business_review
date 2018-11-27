@@ -61,7 +61,7 @@
                         {{ form.password }}
                     {% endif %}
                 </div>
-                <div>
+                <div> 
                     {{ form.confirm_password.label }}
                     
                     {% if form.confirm_password.errors %}
@@ -75,11 +75,22 @@
                         {{ form.confirm_password }}
                     {% endif %}
                 </div>
+                <div>
+                    {{ form.submit }}
+                </div>
             </fieldset>
-            <div>
-                {{ form.submit }}
-            </div>
+            
         </form>
+
+        <div>
+            <ul>
+                {% for user in users%}
+                    <li>{{ user }}</li>
+                {% endfor %}
+            </ul>
+                
+
+        </div>
     </div>
 
 {% endblock content %}

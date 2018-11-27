@@ -1,21 +1,37 @@
-from flask import Flask, render_template, url_for, redirect, flash
+from flask import Flask, render_template, url_for, redirect, flash, request, jsonify
 from forms import SignupForm, SigninForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e8f836430f6c0c054ffe0231a7158fe1'
 
+users = [ 
+            {
+                'username': "Captain Mumo",
+                'email': "mumopeter17@gmail.com",
+                'location': "Oloolua",
+                'password': "qwertyuiop"
+            }
+        ]
+
 @app.route("/")
 def home():
     return render_template('home.html')
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/auth/signup", methods=['GET','POST'])
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
+        user = {
+            'username' : request.form['username'],
+            'email' : request.form['email'],
+            'location' : request.form['location'],
+            'password' : request.form['password']
+        }
+        users.append(user)
         return redirect(url_for('home'))
-    return render_template('signup.html', title='Sign Up', form=form)
+    return render_template('signup.html', title='Sign Up', form=form, users=users)
 
-@app.route("/signin", methods=['GET', 'POST'])
+@app.route("/auth/signin", methods=['GET', 'POST'])
 def signin():
     form = SigninForm()
     if form.validate_on_submit():

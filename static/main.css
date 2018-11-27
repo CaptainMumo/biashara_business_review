@@ -48,6 +48,47 @@ header nav{
     font-weight: bold;
 }
 
+fieldset {
+    width: 50%;
+    margin: auto;
+    float:center;
+    text-align: center;
+    font-size: 16px;
+}
+
+legend {
+    font-size: 28px;
+    
+}
+
+input, label {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid lightslategray;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px; 
+}
+
+
+input[type=submit] {
+    width: 30%;
+    background-color: green;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: green;
+}
+
+
 footer{
     background: blue;
     color:white;
