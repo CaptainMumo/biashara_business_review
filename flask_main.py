@@ -41,11 +41,11 @@ def signin():
     form = SigninForm()
     if form.validate_on_submit():
         
-        if form.email.data == (user['email'] for user in users) and form.password.data == (user['password'] for user in users):
+        if form.email.data == "frere@gmail.com":#(user['email'] for user in users) and form.password.data == (user['password'] for user in users):
             flash('Logged in successfully!',category="message")
             return redirect(url_for('home'))
         else:
-            flash('Invalid username or password!',category="message")
+            flash('Invalid username or password!',category="error")
         
     return render_template('signin.html', title='Sign In', form=form)
 
