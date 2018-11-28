@@ -4,7 +4,15 @@ from forms import SignupForm, SigninForm
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'e8f836430f6c0c054ffe0231a7158fe1'
 
-users = []
+users = [
+        {
+            'email':"kamau@gmail.com",
+            'password' : "password"
+        },
+        {
+            'email' : "frere@gmail.com"
+        }
+]
 
 @app.route("/")
 def home():
@@ -32,8 +40,13 @@ def signup():
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
-        flash('Logged in successfully!',category="message")
-        return redirect(url_for('home'))
+        
+        if form.email.data == (user['email'] for user in users) and form.password.data == (user['password'] for user in users):
+            flash('Logged in successfully!',category="message")
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password!',category="message")
+        
     return render_template('signin.html', title='Sign In', form=form)
 
 if __name__=="__main__":
