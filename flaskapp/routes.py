@@ -1,8 +1,7 @@
-from flask import Flask, render_template, url_for, redirect, flash, request, jsonify
-from forms import SignupForm, SigninForm
+from flask import render_template, redirect, request, flash, url_for
+from flaskapp import app
+from flaskapp.forms import SigninForm, SignupForm
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'e8f836430f6c0c054ffe0231a7158fe1'
 
 users = [
         {
@@ -48,7 +47,3 @@ def signin():
             flash('Invalid username or password!',category="error")
         
     return render_template('signin.html', title='Sign In', form=form)
-
-if __name__=="__main__":
-    app.run(debug=True)
-
