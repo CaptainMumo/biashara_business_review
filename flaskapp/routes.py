@@ -79,9 +79,9 @@ def register_business():
         db.session.commit()
         flash("You have successfully registered a business", "message")
         return redirect(url_for('home'))
-    return render_template("register_business.html", title="Register Business", form=form)
+    return render_template("register_business.html", title="Register Business", form=form, legend='Register Business')
 
-@app.route("/businesses/all", methods=['GET','POST'])
+@app.route("/businesses", methods=['GET','POST'])
 def view_businesses():
     businesses=Business.query.all()
     print(businesses)
@@ -91,4 +91,29 @@ def view_businesses():
 def view_business(business_id):
     business = Business.query.get_or_404(business_id)
     return render_template('view_business.html', title='View Business', business=business)
-    
+
+@app.route("/businesses/<business_id>/update", methods=['GET','POST','PUT'])
+@login_required
+def update_business(business_id):
+    business = Business.query.get_or_404(business_id)
+    if business.owner != current_user:
+        abort(403)
+    form = RegisterBusinessForm()
+    if form.validate_on_submit():
+        business.business_name = form.business_name.data
+        business.category = form.category.data
+        business.description = form.description.data
+        business.location = form.location.data
+        business.email = form.email.data
+        business.phone = form.phone.data
+        db.session.commit()
+        flash('Business profile has been updated!','message')
+        return redirect(url_for('view_business', business_id=business.id))
+    elif request.method == 'GET':
+        form.business_name.data = business.business_name
+        form.category.data = business.category
+        form.description.data = business.description
+        form.location.data = business.location
+        form.email.data = business.email
+        form.phone.data = business.phone
+    return render_template('register_business.html', title='Update Business', form=form, legend='Update Business')
