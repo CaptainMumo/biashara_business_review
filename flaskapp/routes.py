@@ -66,7 +66,7 @@ def signout():
 def account():
     return render_template('account.html', title='Account')
 
-@app.route("/businesses/", methods=['GET','POST'])
+@app.route("/businesses/register", methods=['GET','POST'])
 @login_required
 def register_business():
     form = RegisterBusinessForm()
@@ -80,3 +80,9 @@ def register_business():
         flash("You have successfully registered a business", "message")
         return redirect(url_for('home'))
     return render_template("register_business.html", title="Register Business", form=form)
+
+@app.route("/businesses/all", methods=['GET','POST'])
+def view_businesses():
+    businesses=Business.query.all()
+    print(businesses)
+    return render_template("view_businesses.html", title="View Businesses", businesses=businesses)
