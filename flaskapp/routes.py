@@ -1,9 +1,10 @@
 from flask import render_template, redirect, request, flash, url_for
-from flaskapp import app
+from flaskapp import app, bcrypt, db
 from flaskapp.forms import SigninForm, SignupForm
+from flaskapp.models import User, Business, Review
 
 
-users = [
+"""users = [
         {
             'email':"kamau@gmail.com",
             'password' : "password"
@@ -11,7 +12,7 @@ users = [
         {
             'email' : "frere@gmail.com"
         }
-]
+]"""
 
 @app.route("/")
 def home():
@@ -21,19 +22,22 @@ def home():
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
-
-        user = {
+        """user = {
                 'username' : request.form['username'],
                 'email' : request.form['email'],
                 'location' : request.form['location'],
                 'password' : request.form['password']
             }
-        
-        users.append(user)
+        users.append(user)"""
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data.lower(), email=form.email.data.lower(),
+                    location=form.location.data.lower(), password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
         flash('Account created successfully!',category="message")
         return redirect(url_for('signin')) 
         
-    return render_template('signup.html', title='Sign Up', form=form, users=users) 
+    return render_template('signup.html', title='Sign Up', form=form) 
 
 @app.route("/auth/signin", methods=['GET', 'POST'])
 def signin():
