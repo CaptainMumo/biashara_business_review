@@ -35,5 +35,5 @@ class RegisterBusinessForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     phone = StringField("Phone no.", validators=[DataRequired(), Length(max=20)])
     
-    submit = SubmitField("Register Business")
+    submit = SubmitField("Submit")
 

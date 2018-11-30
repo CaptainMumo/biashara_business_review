@@ -10,6 +10,7 @@
             <th>Location</th>
             <th>Email</th>
             <th>Phone no.</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,9 @@
             <td>{{ business.location }}</td>
             <td>{{ business.email }}</td>
             <td>{{ business.phone }}</td>
+            {% if business.owner == current_user %}
+                <td><a href="{{ url_for('update_business', business_id=business.id) }}">Update</a></td>
+            {% endif %}
         </tr>
     </tbody>
 </table>
