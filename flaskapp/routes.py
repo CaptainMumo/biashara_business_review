@@ -60,3 +60,8 @@ def signout():
         logout_user()
         flash('Logged out successfully!',category="message")
         return redirect(url_for('home'))
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template('account.html', title='Account')
