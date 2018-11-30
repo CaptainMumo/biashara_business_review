@@ -17,7 +17,7 @@
             <nav>
                 <ul>
                     <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="business.html">Businesses</a></li>
+                    <li><a href="{{ url_for('view_businesses') }}">Businesses</a></li>
                     <li><a href="review.html">Reviews</a></li>
                     {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('register_business') }}">Register Business</a></li>
