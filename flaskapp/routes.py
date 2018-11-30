@@ -53,3 +53,10 @@ def signin():
             flash('Invalid username or password!',category="error")
         
     return render_template('signin.html', title='Sign In', form=form)
+
+@app.route("/auth/signout")
+def signout():
+    if current_user.is_authenticated:
+        logout_user()
+        flash('Logged out successfully!',category="message")
+        return redirect(url_for('home'))
