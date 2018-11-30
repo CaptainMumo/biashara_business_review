@@ -86,3 +86,9 @@ def view_businesses():
     businesses=Business.query.all()
     print(businesses)
     return render_template("view_businesses.html", title="View Businesses", businesses=businesses)
+
+@app.route("/businesses/<business_id>", methods=['GET','POST'])
+def view_business(business_id):
+    business = Business.query.get_or_404(business_id)
+    return render_template('view_business.html', title='View Business', business=business)
+    
