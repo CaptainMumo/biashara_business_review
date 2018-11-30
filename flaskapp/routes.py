@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, flash, url_for
 from flaskapp import app, bcrypt, db
-from flaskapp.forms import SigninForm, SignupForm
+from flaskapp.forms import SigninForm, SignupForm, RegisterBusinessForm
 from flaskapp.models import User, Business, Review
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -65,3 +65,18 @@ def signout():
 @login_required
 def account():
     return render_template('account.html', title='Account')
+
+@app.route("/businesses/", methods=['GET','POST'])
+@login_required
+def register_business():
+    form = RegisterBusinessForm()
+    if form.validate_on_submit():
+        business = Business(business_name=form.business_name.data, category=form.category.data, 
+                            description=form.description.data, location=form.location.data,
+                            email=form.email.data, phone=form.phone.data, owner=current_user)
+
+        db.session.add(business)
+        db.session.commit()
+        flash("You have successfully registered a business", "message")
+        return redirect(url_for('home'))
+    return render_template("register_business.html", title="Register Business", form=form)
