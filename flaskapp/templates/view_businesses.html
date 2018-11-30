@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Businesses</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Business name</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Phone no.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for business in businesses %}
+        <tr>
+            <td>{{ business.business_name }}</td>
+            <td>{{ business.category }}</td>
+            <td>{{ business.location }}</td>
+            <td>{{ business.email }}</td>
+            <td>{{ business.phone }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
