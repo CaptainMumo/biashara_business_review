@@ -20,6 +20,7 @@
                     <li><a href="business.html">Businesses</a></li>
                     <li><a href="review.html">Reviews</a></li>
                     {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('account') }}">Account</a></li>
                         <li><a href="{{ url_for('signout') }}">Sign Out</a></li>
                     {% else %}
                         <li><a href="{{ url_for('signin') }}">Sign In</a></li>
