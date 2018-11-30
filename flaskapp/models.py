@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
 
 class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), unique=True, nullable=False)
+    business_name = db.Column(db.String(100), unique=True, nullable=False)
     category = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     location = db.Column(db.String(50), nullable=False)
@@ -31,7 +31,7 @@ class Business(db.Model):
     review = db.relationship("Review", backref="business", lazy=True)
 
     def __repr__(self):
-        return f"Business name : {self.name} Category : {self.category} Location : {self.location} Email : {self.email} Phone no. : {self.phone}"
+        return f"Business name : {self.business_name} Category : {self.category} Location : {self.location} Email : {self.email} Phone no. : {self.phone}"
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
