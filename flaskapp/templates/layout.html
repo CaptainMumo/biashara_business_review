@@ -19,8 +19,12 @@
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="business.html">Businesses</a></li>
                     <li><a href="review.html">Reviews</a></li>
-                    <li><a href="{{ url_for('signin') }}">Sign In</a></li>
-                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('signout') }}">Sign Out</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>  
