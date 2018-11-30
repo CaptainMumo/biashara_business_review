@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, flash, url_for
 from flaskapp import app, bcrypt, db
 from flaskapp.forms import SigninForm, SignupForm
 from flaskapp.models import User, Business, Review
-
+from flask_login import login_user, current_user, logout_user, login_required
 
 """users = [
         {
@@ -43,8 +43,10 @@ def signup():
 def signin():
     form = SigninForm()
     if form.validate_on_submit():
-        
-        if form.email.data == "frere@gmail.com":#(user['email'] for user in users) and form.password.data == (user['password'] for user in users):
+        #if form.email.data == "frere@gmail.com":#(user['email'] for user in users) and form.password.data == (user['password'] for user in users):
+        user = User.query.filter_by(email=form.email.data.lower()).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
             flash('Logged in successfully!',category="message")
             return redirect(url_for('home'))
         else:
