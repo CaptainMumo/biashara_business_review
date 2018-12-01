@@ -117,3 +117,14 @@ def update_business(business_id):
         form.email.data = business.email
         form.phone.data = business.phone
     return render_template('register_business.html', title='Update Business', form=form, legend='Update Business')
+
+@app.route("/businesses/<business_id>/delete", methods=['POST'])
+@login_required
+def delete_business(business_id):
+    business = Business.query.get_or_404(business_id)
+    if business.owner != current_user:
+        abort(403)
+    db.session.delete(business)
+    db.session.commit()
+    flash('The business has been removed successfully!','message')
+    return redirect(url_for('view_businesses'))
