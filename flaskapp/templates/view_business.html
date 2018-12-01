@@ -22,6 +22,7 @@
             <td>{{ business.phone }}</td>
             {% if business.owner == current_user %}
                 <td><a href="{{ url_for('update_business', business_id=business.id) }}">Update</a></td>
+                <td><button>Delete</button></td>
             {% endif %}
         </tr>
     </tbody>
