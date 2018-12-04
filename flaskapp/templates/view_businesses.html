@@ -15,7 +15,7 @@
     <tbody>
         {% for business in businesses %}
         <tr>
-            <td>{{ business.business_name }}</td>
+            <td><a href="{{ url_for('view_business', business_id=business.id) }}">{{ business.business_name }}</a></td>
             <td>{{ business.category }}</td>
             <td>{{ business.location }}</td>
             <td>{{ business.email }}</td>
