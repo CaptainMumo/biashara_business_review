@@ -92,7 +92,7 @@ def view_business(business_id):
     business = Business.query.get_or_404(business_id)
     return render_template('view_business.html', title='View Business', business=business)
 
-@app.route("/businesses/<business_id>/update", methods=['GET','POST','PUT'])
+@app.route("/businesses/<int:business_id>/update", methods=['GET','POST','PUT'])
 @login_required
 def update_business(business_id):
     business = Business.query.get_or_404(business_id)
