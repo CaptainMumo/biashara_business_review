@@ -20,6 +20,7 @@
             <td>{{ business.location }}</td>
             <td>{{ business.email }}</td>
             <td>{{ business.phone }}</td>
+            <td><a href="{{ url_for('view_reviews', business_id=business.id) }}">Reviews</a></td>
         </tr>
         {% endfor %}
     </tbody>
