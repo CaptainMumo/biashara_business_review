@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, flash, url_for
 from flaskapp import app, bcrypt, db
-from flaskapp.forms import SigninForm, SignupForm, RegisterBusinessForm
+from flaskapp.forms import SigninForm, SignupForm, BusinessForm, BusinessReviewForm
 from flaskapp.models import User, Business, Review
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -69,7 +69,7 @@ def account():
 @app.route("/businesses/register", methods=['GET','POST'])
 @login_required
 def register_business():
-    form = RegisterBusinessForm()
+    form = BusinessForm()
     if form.validate_on_submit():
         business = Business(business_name=form.business_name.data, category=form.category.data, 
                             description=form.description.data, location=form.location.data,
@@ -84,7 +84,6 @@ def register_business():
 @app.route("/businesses", methods=['GET','POST'])
 def view_businesses():
     businesses=Business.query.all()
-    print(businesses)
     return render_template("view_businesses.html", title="View Businesses", businesses=businesses)
 
 @app.route("/businesses/<business_id>", methods=['GET','POST'])
@@ -98,7 +97,7 @@ def update_business(business_id):
     business = Business.query.get_or_404(business_id)
     if business.owner != current_user:
         abort(403)
-    form = RegisterBusinessForm()
+    form = BusinessForm()
     if form.validate_on_submit():
         business.business_name = form.business_name.data
         business.category = form.category.data
@@ -128,3 +127,17 @@ def delete_business(business_id):
     db.session.commit()
     flash('The business has been removed successfully!','message')
     return redirect(url_for('view_businesses'))
+
+@app.route("/businesses/<business_id>/reviews", methods=['GET','POST'])
+@login_required
+def post_review(business_id):
+    business = Business.query.get_or_404(business_id)
+    form = BusinessReviewForm()
+    if form.validate_on_submit():
+        review = Review(title=form.title.data, content=form.content.data, author=current_user, business=business)
+        db.session.add(review)
+        db.session.commit()
+        flash("Your review has been posted!", "message")
+        return redirect(url_for('view_business', business_id=business.id))
+    return render_template('review.html', title='Post Review', form=form)
+    
