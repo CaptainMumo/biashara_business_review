@@ -27,7 +27,7 @@ class SigninForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Sign In")
     
-class RegisterBusinessForm(FlaskForm):
+class BusinessForm(FlaskForm):
     business_name = StringField("Business name", validators=[DataRequired(), Length(min=2, max=50)])
     category = StringField("Category", validators=[DataRequired(), Length(min=2, max=50)])
     description = TextAreaField("Description", validators=[DataRequired(), Length(max=500)])
@@ -37,3 +37,8 @@ class RegisterBusinessForm(FlaskForm):
     
     submit = SubmitField("Submit")
 
+class BusinessReviewForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired(), Length(max=20)])
+    content = TextAreaField("Content", validators=[DataRequired(), Length(max=500)])
+    
+    submit = SubmitField("Submit")
