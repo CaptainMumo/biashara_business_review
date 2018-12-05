@@ -138,6 +138,6 @@ def post_review(business_id):
         db.session.add(review)
         db.session.commit()
         flash("Your review has been posted!", "message")
-        return redirect(url_for('view_bsuiness', business_id=business.id))
+        return redirect(url_for('view_business', business_id=business.id))
     return render_template('review.html', title='Post Review', form=form)
     
