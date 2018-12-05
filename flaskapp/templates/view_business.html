@@ -20,6 +20,9 @@
             <td>{{ business.location }}</td>
             <td>{{ business.email }}</td>
             <td>{{ business.phone }}</td>
+            {% if business.owner != current_user %}
+                <td><a href="{{ url_for('post_review', business_id=business.id) }}">Post Review</a></td>
+            {% endif %}
             {% if business.owner == current_user %}
                 <td><a href="{{ url_for('update_business', business_id=business.id) }}">Update</a></td>
                 <td><form method="POST" action="{{ url_for('delete_business', business_id=business.id) }}"><button class="error">Delete</button></form></td>
