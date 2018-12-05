@@ -128,7 +128,7 @@ def delete_business(business_id):
     flash('The business has been removed successfully!','message')
     return redirect(url_for('view_businesses'))
 
-@app.route("/businesses/<business_id>/reviews", methods=['GET','POST'])
+@app.route("/businesses/<business_id>/postreview", methods=['GET','POST'])
 @login_required
 def post_review(business_id):
     business = Business.query.get_or_404(business_id)
@@ -140,4 +140,10 @@ def post_review(business_id):
         flash("Your review has been posted!", "message")
         return redirect(url_for('view_business', business_id=business.id))
     return render_template('review.html', title='Post Review', form=form)
+
+@app.route("/businesses/<business_id>/reviews", methods=['GET'])
+def view_reviews(business_id):
+    reviews = Review.query.all()
+    business = Business.query.get_or_404(business_id)
+    return render_template('view_business.html', title="View Reviews", reviews=reviews, business=business)
     
