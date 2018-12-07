@@ -4,3 +4,4 @@ __pycache__
 .vscode
 development-virtual-environment
 .pytest_cache
+whoosh_index
