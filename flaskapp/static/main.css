@@ -61,7 +61,7 @@ legend {
     
 }
 
-input, label {
+input, label, textarea {
     width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -72,6 +72,9 @@ input, label {
     font-size: 16px; 
 }
 
+label {
+    text-align: unset;
+}
 
 .message {
     width: 40%;

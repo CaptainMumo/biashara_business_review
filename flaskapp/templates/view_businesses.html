@@ -5,6 +5,18 @@
     <input type="text" name="category" id='category'>
     <input type="submit" value="Search">
 </form>
+{% for business in businesses %}
+<fieldset>
+    <h3>{{ business.business_name }}</h3>
+    <p>
+        Category : {{ business.category }}<br>
+        Location : {{ business.location }}<br>
+        Email : {{ business.email }}<br>
+        Phone no. :{{ business.phone }}<br>
+        <a href="{{ url_for('view_reviews', business_id=business.id) }}"><button>Reviews</button></a>
+    </p>
+</fieldset>
+{% endfor %}
 
 <h1>Businesses</h1>
 

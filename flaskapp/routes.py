@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, flash, url_for
 from flaskapp import app, bcrypt, db
-from flaskapp.forms import SigninForm, SignupForm, BusinessForm, BusinessReviewForm, SearchForm
+from flaskapp.forms import SigninForm, SignupForm, BusinessForm, BusinessReviewForm
 from flaskapp.models import User, Business, Review
 from flask_login import login_user, current_user, logout_user, login_required
 

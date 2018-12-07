@@ -1,9 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
+<fieldset>
     <h4>Username</h4>
     <p>{{ current_user.username }}</p>
     <h4>Email</h4>
     <p>{{ current_user.email }}</p>
     <h4>Location</h4>
     <p>{{ current_user.location }}</p>
+</fieldset>
+    
 {% endblock %}
