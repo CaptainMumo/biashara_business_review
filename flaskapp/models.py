@@ -34,7 +34,7 @@ class Business(db.Model):
     def __repr__(self):
         return f"Business name : {self.business_name} Category : {self.category} Location : {self.location} Email : {self.email} Phone no. : {self.phone}"
 
-whoo.whoosh_index(app, Business)
+#whoo.whoosh_index(app, Business)
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
