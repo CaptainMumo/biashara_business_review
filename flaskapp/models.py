@@ -1,6 +1,7 @@
 from datetime import datetime
-from flaskapp import db, login_manager
+from flaskapp import app, db, login_manager
 from flask_login import UserMixin
+import flask_whooshalchemy as whoo
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -18,8 +19,8 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"Username : {self.username} Email : {self.email} Location : {self.location}"
 
-
 class Business(db.Model):
+    __searchable__ = ['category']
     id = db.Column(db.Integer, primary_key=True)
     business_name = db.Column(db.String(100), unique=True, nullable=False)
     category = db.Column(db.String(100), nullable=False)
@@ -33,6 +34,8 @@ class Business(db.Model):
     def __repr__(self):
         return f"Business name : {self.business_name} Category : {self.category} Location : {self.location} Email : {self.email} Phone no. : {self.phone}"
 
+whoo.whoosh_index(app, Business)
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30), nullable=False)
@@ -43,3 +46,5 @@ class Review(db.Model):
 
     def __repr__(self):
         return f"Title : {self.title} Posted by : {self.posted_by} For : {self.posted_for} On : {self.date_posted}"
+    
+
