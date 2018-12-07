@@ -1,5 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+<form method="GET" action="{{ url_for('search') }}">
+    <input type="text" name="category" id='category'>
+    <input type="submit" value="Search">
+</form>
+
 <h1>Businesses</h1>
 
 <table>
