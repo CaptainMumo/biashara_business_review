@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, flash, url_for
 from flaskapp import app, bcrypt, db
-from flaskapp.forms import SigninForm, SignupForm, BusinessForm, BusinessReviewForm
+from flaskapp.forms import SigninForm, SignupForm, BusinessForm, BusinessReviewForm, SearchForm
 from flaskapp.models import User, Business, Review
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -146,4 +146,8 @@ def view_reviews(business_id):
     reviews = Review.query.all()
     business = Business.query.get_or_404(business_id)
     return render_template('view_business.html', title="View Reviews", reviews=reviews, business=business)
-    
+
+@app.route("/businesses/search", methods=['GET'])
+def search():
+    businesses = Business.query.whoosh_search(request.args.get('category')).all()
+    return render_template('view_businesses.html', title="View businesses", businesses=businesses)
